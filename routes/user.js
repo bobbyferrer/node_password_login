@@ -1,17 +1,19 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express'); //1
+const router = express.Router(); //2
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 //User model
 const User = require('../models/User');
 // login page
-router.get('/login', (req, res) => res.render('login'));
+router.get('/login', (req, res) => res.render('login')); //1
 // register
-router.get('/register', (req, res) => res.render('register'));
+router.get('/register', (req, res) => res.render('register')); //2
 
-//Register Handle
+//Register Handle //6
 router.post('/register', (req, res) => {
+	// console.log(req.body); go to the ui registration and test
+	// res.send('test');
 	const { name, email, password, password2 } = req.body;
 	let errors = [];
 

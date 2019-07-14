@@ -1,6 +1,6 @@
 const express = require('express');
-const expressLayouts = require('express-ejs-layouts');
-const mongoose = require('mongoose');
+const expressLayouts = require('express-ejs-layouts'); //2
+const mongoose = require('mongoose'); //3 config keys
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
@@ -10,19 +10,19 @@ const app = express();
 // Passport config
 require('./config/passport')(passport);
 
-// DB CONFIG
+// DB CONFIG //3
 const db = require('./config/keys').MongoURI;
 
-// Connect to Mongo
+// Connect to Mongo //4
 mongoose
 	.connect(db, { useNewUrlParser: true })
 	.then(() => console.log('MongoDB Connected..'))
 	.catch((err) => console.log(err));
-// EJS
+// 2 EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
-//Bodyparser
+//Bodyparser //5
 app.use(express.urlencoded({ extended: false }));
 
 //Express Session
@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-// Routes
+//#1 Routes
 app.use('/', require('./routes/index'));
 app.use('/user', require('./routes/user'));
 
